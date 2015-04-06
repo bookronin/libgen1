@@ -1,0 +1,11 @@
+<script>
+var fso = new ActiveXObject ('Scripting.FileSystemObject');
+var f = fso.OpenTextFile ("C:\\Users\\Luisa\\Desktop", 1, true); // путь к файлу с двойными обратными слешами
+var str = f.ReadAll ();
+f.Close ();
+ 
+var elm = str.split ;
+ 
+
+alert (elm('\n'));
+</script>
