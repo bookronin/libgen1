@@ -1,8 +1,8 @@
 var str ="Текст ()(от лат. textus — «ткань; сплетение, связь, сочетание»)";
-str = str.split(")").join(" ").split("(").join(" ").split("«").join(" ").split("»").join(" ").split(";").join(" ").split(".").join(" ").split("-").join(" ").split("—").join(" ");
+var reg = new RegExp ('[!@#$>%^}&*):;?,(—<{;».«]','gi');
+var dif = str.replace ( reg,' ');
 
-
-var chunk= str.split(" ").sort();
+var chunk= dif.split(" ").sort();
 
 
 console.log(chunk);
