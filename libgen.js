@@ -1,41 +1,70 @@
 /*rawlib-Это переменная, библиотеки юзерских слов*/
-var rawlib ="Повествование, в отличие от описания, представляет собой изображение событий или явлений, совершающихся не одновременно, а следующих друг за другом или обусловливающих друг друга. Самый, по-видимому, краткий в мировой литературе образец повествования – знаменитый рассказ Цезаря: «Пришёл, увидел, победил». Он ярко и точно передаёт суть повествования – это рассказ о том, что произошло, случилось."
+var rawlib ="Повествование, в отличие от описания, представляет собой собой изображение событий или явлений, совершающихся не одновременно, а следующих друг за другом или обусловливающих друг друга. Самый, по-видимому, краткий в мировой литературе образец повествования – знаменитый рассказ Цезаря: «Пришёл, увидел, победил». Он ярко и точно передаёт суть повествования – это рассказ о том, что произошло, случилось."
 var uslib;
-
+var appologies=[];
+var libStat = [];
+var appologyStat=[];
+var z;
+var h;
 
 /* эта функция очищает инпут или новые данные что бы они были готовы для добавления в базу*/
-var readyToLib = function(rawlib){
+var readyToLib;
+readyToLib = function (rawlib) {
 
     /*удаляем символы*/
-    var reg = new RegExp ('[!@`~#$>%^}&*):;?,1234567890–(—<{;».«\n]','gi');
-    var dif = rawlib.replace ( reg,' ');
+    var reg = new RegExp('[!@`~#$>%^}&*):;?,1234567890–(—<{;».«\n]', 'gi');
+    var dif = rawlib.replace(reg, ' ');
 
     /*делаем массив из слов*/
-     uslib= dif.toLowerCase().split(" ").sort();
+    uslib = dif.toLowerCase().split(" ").sort();
+
 
     /*отрезаем все что меньше одного-двух символов*/
-    for (var j = 0 ; j < uslib.length; j++) {
-        if(uslib[j].length <= 2) uslib[j]='';
+    for (var j = 0; j < uslib.length; j++) {
+        if (uslib[j].length <= 2) uslib[j] = '';
     }
+
 
     /*удаляем пустые элементы*/
     for (var i = uslib.length; i >= 0; i--) {
         if (!uslib[i]) uslib.splice(i, 1);
     }
 
+
     /*удаляем все что повторяется*/
-    for(var z = uslib.length; z >= 0; z--) {
-        if(uslib[z] == uslib[z-1]) uslib.splice (z,1);
-
-
+    for ( z = uslib.length; z >= 0; z--) {
+        if (uslib[z] == uslib[z - 1]) uslib.splice(z, 1);
     }
-}
+
+    /*  собираем статистику*/
+    libStat = dif.toLowerCase().split(" ").sort()
+
+    for (var p = 0; p < libStat.length; p++) {
+        if (libStat[p].length <= 2) libStat[p] = '';
+    }
+
+    for (var j4 = 0; j < libStat.length; j4++) {
+        if (libStat[j4].length <= 2) uslib[j4] = '';
+    }
+   for (h = libStat.length ; h >= 0 ; h-- ) {
+        if (!libStat[h]) libStat.splice(h, 1);
+    }
+      for ( z5 = libStat.length; z5 >= 0; z5--) {
+        libStat[z5]='0';
+    }
+
+    for ( z6 = libStat.length; z6 >= 0; z6--)
+        if (libStat[z6] == libStat[z6 - 1]) libStat[z6]=libStat[z6]+1;
+    };
 
 readyToLib(rawlib);
 
+
+
+
+
+console.log(libStat);
 console.log(uslib);
-
-
 
 var angLib = [];
 /*перегоняем все слова в библиотке в англ раскладку для их распознавания при наборе*/
@@ -115,9 +144,7 @@ angSLib(uslib);
 console.log(angLib);
 
 /*то что пользователь печататет*/
-var newNtTpng="и грянул гром W";
-
-
+var newNtTpng="и грянул гром и";
 
 /*взять последнее слово из всего что юзер печатал-печатает,что бы работало со всеми новыми словами*/
 newNtTpng=newNtTpng.toLowerCase();
@@ -129,17 +156,18 @@ var word=TpLs[TpLs.length-1];
 /*находим новое слово(или даже буквы) по совпадениям в базе только в той же раскладке и выдаем варианты*/
 for (var a = 0; a < uslib.length ; a++) {
     if ( uslib[a].substr(0,word.length) === word ) {
-        console.log(uslib[a]);
+        appologies.push(uslib[a]);
     }
 }
 
 /*находим новое слово(или даже буквы) по совпадениям если бы он писал на русском и выдаем варианты в нормальной раскладке*/
 for (var a2 = 0; a2 < angLib.length ; a2++) {
     if ( angLib[a2].substr(0,word.length) === word ) {
-        console.log(uslib[a2]);
+        appologies.push(uslib[a2]);
     }
 }
 
+console.log(appologies)
 
 
 
