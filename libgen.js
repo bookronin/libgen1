@@ -17,53 +17,31 @@ readyToLib = function (rawlib) {
 
     /*делаем массив из слов*/
     uslib = dif.toLowerCase().split(" ").sort();
-
+    libStat = dif.toLowerCase().split(" ").sort();
 
     /*отрезаем все что меньше одного-двух символов*/
     for (var j = 0; j < uslib.length; j++) {
         if (uslib[j].length <= 2) uslib[j] = '';
+        if (uslib[j].length <= 2) libStat[j] = '';
     }
 
 
     /*удаляем пустые элементы*/
     for (var i = uslib.length; i >= 0; i--) {
         if (!uslib[i]) uslib.splice(i, 1);
+
     }
 
 
     /*удаляем все что повторяется*/
     for ( z = uslib.length; z >= 0; z--) {
-        if (uslib[z] == uslib[z - 1]) uslib.splice(z, 1);
-    }
+        if (uslib[z] == uslib[z - 1]) uslib.splice(z-1, 1);
 
-    /*  собираем статистику*/
-    libStat = dif.toLowerCase().split(" ").sort()
-
-    for (var p = 0; p < libStat.length; p++) {
-        if (libStat[p].length <= 2) libStat[p] = '';
     }
-
-    for (var j4 = 0; j < libStat.length; j4++) {
-        if (libStat[j4].length <= 2) uslib[j4] = '';
-    }
-   for (h = libStat.length ; h >= 0 ; h-- ) {
-        if (!libStat[h]) libStat.splice(h, 1);
-    }
-      for ( z5 = libStat.length; z5 >= 0; z5--) {
-        libStat[z5]='0';
-    }
-
-    for ( z6 = libStat.length; z6 >= 0; z6--)
-        if (libStat[z6] == libStat[z6 - 1]) libStat[z6]=libStat[z6]+1;
     };
 
 readyToLib(rawlib);
 
-
-
-
-
-console.log(libStat);
 console.log(uslib);
 
 var angLib = [];
